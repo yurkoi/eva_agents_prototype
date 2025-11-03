@@ -1,0 +1,29 @@
+services:
+  eva-mcp:
+    image: eva-mcp:latest
+    container_name: eva-mcp
+    network_mode: host
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      CHROMA_PATH: /chroma_data
+      SHOP_DB_PATH: /shop.db
+      CHROMA_COLLECTION_PREFIX: eva_products_
+      MODEL_EMB: text-embedding-3-small
+      VECTOR_NAME: title
+      SEARCH_TOPK: "5"
+    volumes:
+      - ./chroma_data:/chroma_data
+      - ./shop.db:/shop.db
+    restart: unless-stopped
+
+  eva-ui:
+    image: eva-ui:latest
+    container_name: eva-ui
+    network_mode: host
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      MCP_URL: http://localhost:8000/mcp
+    volumes:
+      - ./ui:/app
+    working_dir: /app
+    restart: unless-stopped

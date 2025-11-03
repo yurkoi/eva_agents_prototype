@@ -1,0 +1,4 @@
+.venv
+chroma_data
+.env
+shop.db

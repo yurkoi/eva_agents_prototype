@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+.env*
+.vscode/
+.idea/
+dist/
+build/
+venv/
+.venv/
+data/
+chroma_data/
+shop.db
